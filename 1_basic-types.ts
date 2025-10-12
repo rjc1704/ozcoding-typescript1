@@ -7,7 +7,7 @@
 
   const anyValue: any = "Hello"; // any 타입, 어떤 타입이든 될 수 있음
   const unknownValue: unknown = 42;
-  // unknown 타입, 어떤 타입이든 될 수 있지만 런타임에 타입 검사해야 사용할 수 있음.
+  // unknown 타입, 어떤 타입이든 할당될 수 있지만, 타입 좁히기를 통해 타입을 확인해야 사용할 수 있음.
   if (typeof unknownValue === "number") {
     console.log(unknownValue + 1);
   }
@@ -20,8 +20,15 @@
   direction = "left";
 
   // 인터섹션 타입: 모든 타입 조건을 동시에 만족해야하는 타입
-  type RedOrBlue = "red" | "blue";
-  type BlueOrGreen = "blue" | "green";
-  type OnlyBlue = RedOrBlue & BlueOrGreen;
+  type OnlyBlue = ("red" | "blue") & ("blue" | "green");
   let blue: OnlyBlue = "blue";
+
+  // enum 타입: 열거형으로, 관련된 상수들을 하나의 네임스페이스로 묶어서 관리
+  enum Direction {
+    Up = "UP",
+    Down = "DOWN",
+    Left = "LEFT",
+    Right = "RIGHT",
+  }
+  let playerDirection: Direction = Direction.Up;
 }
