@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import TodoForm from "../components/TodoForm";
 import TodoList from "../components/TodoList";
+import reactLogo from "../assets/react.svg";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -39,7 +40,10 @@ export default function Home() {
 
   return (
     <>
-      <h2>서버통신 투두리스트 by useState</h2>
+      <h2>
+        <img src={reactLogo} alt="logo" />
+        서버통신 투두리스트 by useState
+      </h2>
       <TodoForm fetchData={fetchData} setError={setError} />
       <TodoList todos={data} />
     </>
