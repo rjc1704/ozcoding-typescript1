@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { NetworkError, Todo } from "../types/todo.type";
 
 export default function Detail() {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: Todo["id"] }>();
 
   const navigate = useNavigate();
 
