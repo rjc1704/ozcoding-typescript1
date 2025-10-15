@@ -1,4 +1,5 @@
 // DOM 요소 조작 시 자주 사용
+
 const inputElement = document.getElementById("username") as HTMLInputElement;
 inputElement.value = "hello"; // HTMLInputElement로 단언했으므로 value 접근 가능
 

@@ -9,12 +9,17 @@ type Person = {
 const student: Person = {
   name: "Jane",
   age: 22,
-  isStudent: true,
+  // isStudent: true,
   residentId: "9876543210",
 };
 
 // student.residentId = "1234567890";
-
+// type Person = {
+//   name: string;
+//   age: number;
+//   isStudent?: boolean;
+//   readonly residentId: string;
+// };
 // 중첩 객체 타입
 type Address = {
   street: string;

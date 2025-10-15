@@ -5,7 +5,7 @@ async function fetchData(url: string) {
     const response = await axios.get(url);
     console.log("Data:", response.data);
     // AxiosError가 아닌 다른 에러 발생
-    // throw new Error("This is a general error");
+    throw new Error("This is a general error");
   } catch (error) {
     if (error instanceof AxiosError) {
       // AxiosError인 경우

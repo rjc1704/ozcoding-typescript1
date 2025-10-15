@@ -63,16 +63,16 @@ const sum = combine(1, 2); // 3
 const joined = combine("Hello, ", "world!"); // "Hello, world!"
 
 // async 함수에서의 타입 지정
-// type Todo = {
-//   userId: number;
-//   id: number;
-//   title: string;
-//   completed: boolean;
-// };
+type Todo = {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+};
 // TODO: 함수 타입 정의할 것
-const getTodos = async () => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-  const data = await response.json();
+const getTodos = async (): Promise<Todo[]> => {
+  const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = (await response.json()) as Todo[];
   return data;
 };
 getTodos().then((data) => console.log(data));

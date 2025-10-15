@@ -1,3 +1,4 @@
+// 도형 타입에 따른 넓이 구하기 (판별 유니옵 타입 기본 예제)
 type Circle = {
   type: "circle"; // 판별자 (discriminator)
   radius: number;
