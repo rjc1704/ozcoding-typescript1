@@ -1,9 +1,15 @@
 import { useState } from "react";
+import { NetworkError } from "../types/todo.type";
 
-export default function TodoForm({ fetchData, setError }) {
+interface TodoFormProps {
+  fetchData: () => Promise<void>;
+  setError: React.Dispatch<React.SetStateAction<NetworkError | Error | null>>;
+}
+
+export default function TodoForm({ fetchData, setError }: TodoFormProps) {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
-  const handleAddTodo = async (e) => {
+  const handleAddTodo: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setTitle("");
     setContents("");
@@ -23,7 +29,11 @@ export default function TodoForm({ fetchData, setError }) {
       });
       await fetchData();
     } catch (err) {
-      setError(err);
+      if (err instanceof NetworkError) {
+        setError(err);
+      } else {
+        setError(new Error(String(err)));
+      }
     }
   };
 

@@ -2,22 +2,27 @@ import { useState, useEffect } from "react";
 import TodoForm from "../components/TodoForm";
 import TodoList from "../components/TodoList";
 import reactLogo from "../assets/react.svg";
+import { NetworkError, Todo } from "../types/todo.type";
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<null | Error | NetworkError>(null);
+  const [data, setData] = useState<Todo[]>([]);
 
-  const fetchData = async () => {
+  const fetchData = async (): Promise<void> => {
     try {
       const response = await fetch("http://localhost:4000/todos");
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new NetworkError(`HTTP error! status: ${response.status}`);
       }
-      const data = await response.json();
+      const data: Todo[] = await response.json();
       setData(data);
     } catch (err) {
-      setError(err);
+      if (err instanceof NetworkError) {
+        setError(err);
+      } else {
+        setError(new Error(String(err)));
+      }
     } finally {
       setIsLoading(false);
     }
